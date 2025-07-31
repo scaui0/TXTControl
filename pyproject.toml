@@ -1,0 +1,21 @@
+[project]
+name = "txtcontrol"
+version = "1.0.0"
+description = "A pythonic implementation of ftrobopy using asyncio."
+requires-python = ">=3.13"
+authors = [{ name = "Franz Weingartz", email = "scaui0@gmx.net" }]
+license = "MIT"
+readme = { file = "README.md" }
+keywords = ["ftrobopy", "asyncio", "robotics", "txt", "robot", "controller", "ft", "fischertechnik"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Framework :: AsyncIO",
+    "Natural Language :: English"
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
