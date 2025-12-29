@@ -1,7 +1,7 @@
 """
-TXTControl - A pythonic implementation of ftrobopy using asyncio.
+TXTControl - A Pythonic, asyncio-based ftrobopy implementation for the Fischertechnik TXT Controller
 
-This library allows controlling the fischertechnik TXT controller with Python from a remote.
+This library allows controlling the Fischertechnik TXT controller with Python from a remote.
 It provides an asynchronous API, making it easy to integrate in modern Python applications without using complex
 thread-handling.
 

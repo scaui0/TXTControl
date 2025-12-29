@@ -1,6 +1,6 @@
 # TXTControl
 
-A pythonic implementation of ftrobopy using asyncio.
+A Pythonic, asyncio-based ftrobopy implementation for the Fischertechnik TXT Controller.
 
 > **Warning!**
 >

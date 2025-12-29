@@ -1,15 +1,18 @@
 [project]
 name = "txtcontrol"
 version = "1.0.0"
-description = "A pythonic implementation of ftrobopy using asyncio."
-requires-python = ">=3.13"
+description = "A Pythonic, asyncio-based ftrobopy implementation for the Fischertechnik TXT Controller"
+requires-python = ">=3.12"
 authors = [{ name = "Franz Weingartz", email = "scaui0@gmx.net" }]
 license = "MIT"
-readme = { file = "README.md" }
+readme = { file = "README.md", content-type = "text/markdown" }
 keywords = ["ftrobopy", "asyncio", "robotics", "txt", "robot", "controller", "ft", "fischertechnik"]
 classifiers = [
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Framework :: AsyncIO",
