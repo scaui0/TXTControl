@@ -161,6 +161,7 @@ class TXT:
     The class representing the TXT connection.
 
     If `host` is not given, TXTControl tries to find a TXT using the following ports:
+
     1. `192.168.7.2` USB (Ethernet)
     2. `192.168.8.2` WLAN
     3. `192.168.9.2` Bluetooth
@@ -247,6 +248,11 @@ class TXT:
 
         Returns:
             device name, device version
+
+        Examples:
+            >>> async with TXT() as txt:
+            ...     device_name, device_version = await txt.query_status()
+            ...     print(f"TXT {device_name} connected. Version: {device_version}")
         """
         device_name, version = await self._simple_request(0xDC21219A, 0xBAC9723E, "<I16sI")
 
@@ -502,7 +508,16 @@ class TXT:
         await self._simple_request(0x17C31F2F, 0x4B3C1EB6, "<I")
 
     async def wait(self):
-        """Wait until the next time the TXT sends new input values."""
+        """
+        Wait until the next time the TXT sends new input values. Used in loops to prevent sending too many commands.
+
+        Examples:
+            >>> async with TXT() as txt:
+            ...     motor = await Motor.create(txt, 0)
+            ...     for i in range(512):
+            ...         motor.speed = i
+            ...         await txt.wait()
+        """
         await self._update_event.wait()
 
     @asynccontextmanager
@@ -510,8 +525,8 @@ class TXT:
         """
         Contextmanager that syncs multiple commands without sending the current state to the TXT.
 
-        Warnings:
-            This method just blocks the connection. Long-running operations will result in a deadlock or in a
+        !!! warning "Blocking operation"
+            This method internally just blocks the connection. Long-running operations will result in a deadlock or in a
             TXTConnectionError!
         """
         async with self._connection_lock:
@@ -561,6 +576,7 @@ class Motor:
 
     @property
     def speed(self):
+        """The current speed of the motor"""
         return self._speed
 
     @speed.setter
@@ -576,6 +592,7 @@ class Motor:
 
     @property
     def distance(self):
+        """The target distance for the motor."""
         return self._distance
 
     @distance.setter
@@ -625,6 +642,7 @@ class SyncedMotor:
 
     @property
     def speed(self):
+        """The current speed of the motors"""
         return self._speed
 
     @speed.setter
@@ -635,6 +653,7 @@ class SyncedMotor:
 
     @property
     def distance(self):
+        """The target distance for the motors."""
         return self._distance
 
     @distance.setter
@@ -729,7 +748,7 @@ class _Input:
 
     def __init__(self, txt: TXT, port: int):
         """
-        Create a new inout class instance.
+        Create a new input class instance.
 
         Args:
             txt: the base TXT class.
@@ -771,6 +790,7 @@ class Button(_Input):
 
     @property
     def state(self) -> bool:
+        """If the button is pressed or not."""
         return bool(super().state)
 
 
@@ -849,7 +869,7 @@ class TrailFollower(Voltage):
 
 
 class Sound(IntEnum):
-    """The sounds that the TXT can play. The sound names are not the original ones!"""
+    """The sounds that the TXT can play. The sound names do not match the original ones!"""
 
     EMPTY = 0
     AIRPLANE = 1
